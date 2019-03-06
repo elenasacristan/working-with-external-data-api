@@ -139,7 +139,7 @@ function writeToDocument(url) {
             tableRows.push(`<tr>${individualRow}</tr>`);
 
             //document.getElementById("data").innerHTML += "<p>" + item.name + "</p>";
-            element.innerHTML = `<table>${tableheaders}${tableRows}</table>${pagination}`;
+            element.innerHTML = `<table>${tableheaders}${tableRows}</table>${pagination}`.replace(/,/g,"");
 
         })
 
