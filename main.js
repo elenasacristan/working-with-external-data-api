@@ -54,14 +54,13 @@
 //}
 
 //getData(printDataToConsole);
-var baseURL = "https://swapi.co/api/"
 
-function getData(type, callback) {
+function getData(url, callback) {
 
     var xhr = new XMLHttpRequest();
     var data;
 
-    xhr.open("GET", baseURL + type + "/");
+    xhr.open("GET", url);
     xhr.send();
 
     xhr.onreadystatechange = function() {
@@ -85,31 +84,62 @@ function createTableHeaders(obj) {
 
 }
 
-function writeToDocument(type) { //type refers to films, species, people "types"
+
+
+function generatePaginationButtons(next, prev) {
+    if (next && prev) {
+        return `<button onclick="writeToDocument('${prev}')">Previous</button>
+                <button onclick="writeToDocument('${next}')">Next</button>`;
+    }
+    else if (next && !prev) {
+        return `<button onclick="writeToDocument('${next}')">Next</button>`;
+    }
+    else if (!next && prev) {
+        return `<button onclick="writeToDocument('${prev}')">Previous</button>`;
+    }
+
+}
+
+
+
+
+function writeToDocument(url) {
+
+
 
     var tableRows = []; //this array will contain a row per item
     var element = document.getElementById("data");
-    element.innerHTML = ""; // everytime the writeToDocument function is called the innerHTML contents is removed
 
-    getData(type, function(data) {
+    getData(url, function(data) {
+
+       var pagination = "";
+
+       if (data.next || data.previous) {
+            pagination = generatePaginationButtons(data.next, data.previous);
+        }
+      
+  
+  
+        
+        
         var data = data.results;
 
         var tableheaders = createTableHeaders(data[0]); // we will pass the fist object in the array
         // console.dir(data);
         data.forEach(function(item) {
-            
+
             individualRow = [];
             Object.keys(item).forEach(function(key) {
                 var rowData = item[key].toString();
-                var truncated = rowData.substring(0,8); // we truncate the data because to fit it properly in the screen
+                var truncated = rowData.substring(0, 8); // we truncate the data because to fit it properly in the screen
                 individualRow.push(`<td>${truncated}</td>`); // this will add the corresponding item matching the heading "key"
-                
+
             })
-            
+
             tableRows.push(`<tr>${individualRow}</tr>`);
-            
+
             //document.getElementById("data").innerHTML += "<p>" + item.name + "</p>";
-            element.innerHTML = `<table>${tableheaders}${tableRows}</table>`;
+            element.innerHTML = `<table>${tableheaders}${tableRows}</table>${pagination}`;
 
         })
 
