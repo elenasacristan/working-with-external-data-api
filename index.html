@@ -7,10 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>AJAX Test</title>
+    
+     <script type="text/javascript" src="static/js/d3.min.js"></script>
+    <script type="text/javascript" src="static/js/crossfilter.min.js"></script>
+    <script type="text/javascript" src="static/js/dc.min.js"></script>
+    <script type="text/javascript" src="static/js/queue.min.js"></script>
+    <script type="text/javascript" src="static/js/graph.js"></script>
+    
+    
     <script type="text/javascript" src="main.js"></script>
 </head>
 
 <body>
+    
     <button onclick="writeToDocument('https://swapi.co/api/people')">people</button>
     <button onclick="writeToDocument('https://swapi.co/api/planets')">planets</button>
     <button onclick="writeToDocument('https://swapi.co/api/species')">species</button>
@@ -19,6 +28,33 @@
     <button onclick="writeToDocument('https://swapi.co/api/films')">films</button>
 
     <div id="data"></div>
+    <button onclick="clearData()">Clear data</button>
+
+    
+    <section class="section">
+            <div class="charts">
+
+               
+                    <div class="chart">
+                        <p class="title">text</p>
+                       <div  id="gender_balance"></div>
+                    </div>
+                    <div class="chart">
+                        <p class="title">text 2</p>
+                          <div class="chart" id="average_salary_by_gender"></div>
+                    </div>
+                    <div class="chart">
+                        <p class="titleh">text 3</p>
+                             <div id="rank_by_gender"></div>
+                    </div>
+               
+
+               
+            </div>
+        </section>
+    
+    
+    
 </body>
 
 </html>

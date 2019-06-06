@@ -118,11 +118,7 @@ function writeToDocument(url) {
             pagination = generatePaginationButtons(data.next, data.previous);
         }
       
-  
-  
-        
-        
-        var data = data.results;
+          var data = data.results;
 
         var tableheaders = createTableHeaders(data[0]); // we will pass the fist object in the array
         // console.dir(data);
@@ -145,4 +141,8 @@ function writeToDocument(url) {
 
     });
 
+}
+
+function clearData(){
+    document.getElementById("data").innerHTML="";
 }
